@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "all",
+  "type": "registry:ui",
+  "description": "All UI components from Agora AI Builder UI",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/ui/hello-world.tsx",
+      "type": "registry:ui",
+      "target": "",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface HelloWorldProps extends React.HTMLAttributes<HTMLDivElement> {\n  message?: string\n}\n\nfunction HelloWorld({\n  className,\n  message = \"Hello, World!\",\n  ...props\n}: HelloWorldProps) {\n  return (\n    <div\n      className={cn(\n        \"bg-card text-card-foreground rounded-lg border p-8 shadow-sm\",\n        className\n      )}\n      {...props}\n    >\n      <h1 className=\"mb-4 text-2xl font-bold\">{message}</h1>\n      <p className=\"text-muted-foreground\">\n        Welcome to Agora AI Builder UI! This is your first component.\n      </p>\n    </div>\n  )\n}\n\nexport { HelloWorld }\n"
+    }
+  ]
+}

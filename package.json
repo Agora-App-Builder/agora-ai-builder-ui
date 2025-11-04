@@ -1,0 +1,43 @@
+{
+  "name": "agora-ai-builder-ui",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "typecheck": "turbo run typecheck",
+    "format:write": "turbo run format:write",
+    "format:check": "turbo run format:check",
+    "check": "turbo lint typecheck format:check"
+  },
+  "packageManager": "pnpm@9.0.6",
+  "dependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
+    "@typescript-eslint/parser": "^8.31.0",
+    "eslint": "^9",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-turbo": "^1.9.9",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-tailwindcss": "^3.13.1",
+    "postcss": "^8.5.1",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "tailwindcss": "^4.1.11",
+    "@tailwindcss/postcss": "^4.1.11",
+    "turbo": "^2.6.0",
+    "typescript": "^5"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "19.1.2",
+    "@types/react-dom": "19.1.2"
+  }
+}

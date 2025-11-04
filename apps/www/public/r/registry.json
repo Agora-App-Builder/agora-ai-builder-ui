@@ -1,0 +1,17 @@
+{
+  "name": "agora-ui",
+  "homepage": "https://github.com/agora/agora-ai-builder-ui",
+  "items": [
+    {
+      "name": "hello-world",
+      "type": "registry:ui",
+      "description": "A simple Hello World component",
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/hello-world.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}
