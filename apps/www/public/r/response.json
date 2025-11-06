@@ -1,0 +1,13 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "response",
+  "type": "registry:ui",
+  "description": "Response component for displaying message content text",
+  "files": [
+    {
+      "path": "components/ui/response.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface ResponseProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nexport const Response = React.forwardRef<HTMLDivElement, ResponseProps>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"text-sm leading-relaxed break-words whitespace-pre-wrap\",\n        className\n      )}\n      {...props}\n    />\n  )\n)\n\nResponse.displayName = \"Response\"\n",
+      "type": "registry:ui"
+    }
+  ]
+}
