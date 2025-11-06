@@ -220,6 +220,21 @@
       ]
     },
     {
+      "name": "agent-visualizer",
+      "type": "registry:ui",
+      "description": "An animated agent visualizer component that displays Lottie animations for different agent states",
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/agent-visualizer.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/agora-ui/examples/agent-visualizer-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
       "name": "conversation-demo",
       "type": "registry:ui",
       "description": "A complete conversation component demo with streaming messages",

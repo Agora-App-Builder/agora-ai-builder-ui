@@ -59,16 +59,20 @@ export function MicSelector({
             "relative inline-flex items-center justify-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-medium transition-colors",
             // Idle and active states
             !isError &&
-              "border-input bg-background hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+              "border-input bg-background hover:bg-accent focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
             // Error state
             isError &&
-              "border-destructive bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2 cursor-not-allowed",
+              "border-destructive bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:ring-destructive cursor-not-allowed focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
             // Disabled
-            (disabled || items.length === 0) && "opacity-50 cursor-not-allowed",
+            (disabled || items.length === 0) && "cursor-not-allowed opacity-50",
             className
           )}
         >
-          {isError ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+          {isError ? (
+            <MicOff className="h-4 w-4" />
+          ) : (
+            <Mic className="h-4 w-4" />
+          )}
           {isActive && (
             <LiveWaveform
               active={isListening}
