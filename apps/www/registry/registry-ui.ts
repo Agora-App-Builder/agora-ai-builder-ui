@@ -211,6 +211,22 @@ export const ui: Registry["items"] = [
     ],
   },
   {
+    name: "agent-visualizer",
+    description:
+      "An animated agent visualizer component that displays Lottie animations for different agent states",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/agent-visualizer.tsx",
+        type: "registry:ui",
+      },
+      {
+        path: "examples/agent-visualizer-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
     name: "conversation-demo",
     description:
       "A complete conversation component demo with streaming messages",

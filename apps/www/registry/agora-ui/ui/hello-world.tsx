@@ -21,7 +21,7 @@ function HelloWorld({
     >
       <h1 className="mb-4 text-2xl font-bold">{message}</h1>
       <p className="text-muted-foreground">
-        Welcome to Agora AI Builder UI! This is your first component --updated.
+        Welcome to Agora AI Builder UI! This is your first component .
       </p>
     </div>
   )

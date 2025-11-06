@@ -2,6 +2,7 @@ import ButtonDemo from "@/registry/agora-ui/examples/button-demo"
 import CardDemo from "@/registry/agora-ui/examples/card-demo"
 import ChipDemo from "@/registry/agora-ui/examples/chip-demo"
 import AgentPickerDemo from "@/registry/agora-ui/examples/agent-picker-demo"
+import AgentVisualizerDemo from "@/registry/agora-ui/examples/agent-visualizer-demo"
 import MicButtonDemo from "@/registry/agora-ui/examples/mic-button-demo"
 import MicSelectorDemo from "@/registry/agora-ui/examples/mic-selector-demo"
 import LiveWaveformDemo from "@/registry/agora-ui/examples/live-waveform-demo"
@@ -127,6 +128,19 @@ export default function ComponentsPage() {
           </div>
           <div className="rounded-lg border p-6">
             <AvatarDemo />
+          </div>
+        </section>
+
+        {/* Agent Visualizer Component */}
+        <section className="space-y-4">
+          <div>
+            <h2 className="text-2xl font-bold">Agent Visualizer</h2>
+            <p className="text-muted-foreground text-sm">
+              An animated agent visualizer component that displays Lottie animations for different agent states
+            </p>
+          </div>
+          <div className="rounded-lg border p-6">
+            <AgentVisualizerDemo />
           </div>
         </section>
 

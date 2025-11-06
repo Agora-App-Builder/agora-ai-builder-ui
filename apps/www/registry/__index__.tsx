@@ -413,6 +413,36 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "agent-visualizer": {
+    name: "agent-visualizer",
+    description:
+      "An animated agent visualizer component that displays Lottie animations for different agent states",
+    type: "registry:ui",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/agora-ui/ui/agent-visualizer.tsx",
+        type: "registry:ui",
+        target: "",
+      },
+      {
+        path: "registry/agora-ui/examples/agent-visualizer-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/agora-ui/ui/agent-visualizer.tsx")
+      const exportName =
+        Object.keys(mod).find(
+          (key) =>
+            typeof mod[key] === "function" || typeof mod[key] === "object"
+        ) || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   "conversation-demo": {
     name: "conversation-demo",
     description:
