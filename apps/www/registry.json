@@ -12,6 +12,209 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "description": "A button component built with Radix UI and styled with Tailwind CSS",
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/button.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/agora-ui/examples/button-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "description": "A popover component built with Radix UI",
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/popover.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "description": "A combobox component for searchable dropdowns",
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/command.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "agent-picker",
+      "type": "registry:ui",
+      "description": "A dropdown component to select agents from a list",
+      "registryDependencies": ["button", "popover", "command"],
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/agent-picker.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/agora-ui/examples/agent-picker-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "description": "A composable card component for grouping content",
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/card.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/agora-ui/examples/card-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "chip",
+      "type": "registry:ui",
+      "description": "A flexible wrapper component with rounded pill-shaped background for grouping controls",
+      "registryDependencies": ["button", "mic-selector"],
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/chip.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/agora-ui/examples/chip-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "description": "A dropdown menu component built with Radix UI",
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/dropdown-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "mic-button",
+      "type": "registry:ui",
+      "description": "A button component with mic icon and states (idle, inactive, processing, error)",
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/mic-button.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/agora-ui/examples/mic-button-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "mic-selector",
+      "type": "registry:ui",
+      "description": "A button with dropdown menu for selecting items, with mic icon and states",
+      "registryDependencies": ["button", "dropdown-menu", "mic-button"],
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/mic-selector.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/agora-ui/examples/mic-selector-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "live-waveform",
+      "type": "registry:ui",
+      "description": "An animated waveform visualization component with states (idle, processing, error)",
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/live-waveform.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/agora-ui/examples/live-waveform-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "conversation",
+      "type": "registry:ui",
+      "description": "A scrollable conversation component for displaying user and assistant messages",
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/conversation.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "message",
+      "type": "registry:ui",
+      "description": "Message component for displaying individual chat messages",
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/message.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "response",
+      "type": "registry:ui",
+      "description": "Response component for displaying message content text",
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/response.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "description": "A flexible avatar component that displays images, icons, or initials",
+      "files": [
+        {
+          "path": "registry/agora-ui/ui/avatar.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/agora-ui/examples/avatar-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "conversation-demo",
+      "type": "registry:ui",
+      "description": "A complete conversation component demo with streaming messages",
+      "registryDependencies": ["conversation", "message", "response", "avatar"],
+      "files": [
+        {
+          "path": "registry/agora-ui/examples/conversation-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
     }
   ]
 }
