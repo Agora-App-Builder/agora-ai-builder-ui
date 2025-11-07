@@ -9,7 +9,6 @@
     "packages/*"
   ],
   "scripts": {
-    "install": "cd apps/wwww && npm run install",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
