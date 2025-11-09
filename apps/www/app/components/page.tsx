@@ -1,18 +1,19 @@
+import AgentPickerDemo from "@/registry/agora-ui/examples/agent-picker-demo"
+import AgentVisualizerDemo from "@/registry/agora-ui/examples/agent-visualizer-demo"
+import AvatarDemo from "@/registry/agora-ui/examples/avatar-demo"
 import ButtonDemo from "@/registry/agora-ui/examples/button-demo"
 import CardDemo from "@/registry/agora-ui/examples/card-demo"
 import ChipDemo from "@/registry/agora-ui/examples/chip-demo"
-import AgentPickerDemo from "@/registry/agora-ui/examples/agent-picker-demo"
-import AgentVisualizerDemo from "@/registry/agora-ui/examples/agent-visualizer-demo"
+import ConversationDemo from "@/registry/agora-ui/examples/conversation-demo"
+import LiveWaveformDemo from "@/registry/agora-ui/examples/live-waveform-demo"
 import MicButtonDemo from "@/registry/agora-ui/examples/mic-button-demo"
 import MicSelectorDemo from "@/registry/agora-ui/examples/mic-selector-demo"
-import LiveWaveformDemo from "@/registry/agora-ui/examples/live-waveform-demo"
-import AvatarDemo from "@/registry/agora-ui/examples/avatar-demo"
-import ConversationDemo from "@/registry/agora-ui/examples/conversation-demo"
+
 import { ThemeToggle } from "./theme-toggle"
 
 export default function ComponentsPage() {
   return (
-    <main className="min-h-screen bg-background p-8">
+    <main className="bg-background min-h-screen p-8">
       <div className="mb-8 flex justify-end">
         <ThemeToggle />
       </div>
@@ -28,7 +29,7 @@ export default function ComponentsPage() {
         </div>
 
         {/* Button Component */}
-        <section className="space-y-4">
+        {/* <section className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold">Button</h2>
             <p className="text-muted-foreground text-sm">
@@ -38,15 +39,12 @@ export default function ComponentsPage() {
           <div className="rounded-lg border p-6">
             <ButtonDemo />
           </div>
-        </section>
+        </section> */}
 
         {/* Card Component */}
         <section className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold">Card</h2>
-            <p className="text-muted-foreground text-sm">
-              A composable card component for grouping content
-            </p>
           </div>
           <div className="rounded-lg border p-6">
             <CardDemo />
@@ -54,7 +52,7 @@ export default function ComponentsPage() {
         </section>
 
         {/* Chip Component */}
-        <section className="space-y-4">
+        {/* <section className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold">Chip</h2>
             <p className="text-muted-foreground text-sm">
@@ -64,10 +62,10 @@ export default function ComponentsPage() {
           <div className="rounded-lg border p-6">
             <ChipDemo />
           </div>
-        </section>
+        </section> */}
 
         {/* Agent Picker Component */}
-        <section className="space-y-4">
+        {/* <section className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold">Agent Picker</h2>
             <p className="text-muted-foreground text-sm">
@@ -77,10 +75,10 @@ export default function ComponentsPage() {
           <div className="rounded-lg border p-6">
             <AgentPickerDemo />
           </div>
-        </section>
+        </section> */}
 
         {/* Mic Button Component */}
-        <section className="space-y-4">
+        {/* <section className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold">Mic Button</h2>
             <p className="text-muted-foreground text-sm">
@@ -90,10 +88,10 @@ export default function ComponentsPage() {
           <div className="rounded-lg border p-6">
             <MicButtonDemo />
           </div>
-        </section>
+        </section> */}
 
         {/* Mic Selector Component */}
-        <section className="space-y-4">
+        {/* <section className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold">Mic Selector</h2>
             <p className="text-muted-foreground text-sm">
@@ -103,10 +101,10 @@ export default function ComponentsPage() {
           <div className="rounded-lg border p-6">
             <MicSelectorDemo />
           </div>
-        </section>
+        </section> */}
 
         {/* Live Waveform Component */}
-        <section className="space-y-4">
+        {/* <section className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold">Live Waveform</h2>
             <p className="text-muted-foreground text-sm">
@@ -116,10 +114,10 @@ export default function ComponentsPage() {
           <div className="rounded-lg border p-6">
             <LiveWaveformDemo />
           </div>
-        </section>
+        </section> */}
 
         {/* Avatar Component */}
-        <section className="space-y-4">
+        {/* <section className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold">Avatar</h2>
             <p className="text-muted-foreground text-sm">
@@ -129,14 +127,15 @@ export default function ComponentsPage() {
           <div className="rounded-lg border p-6">
             <AvatarDemo />
           </div>
-        </section>
+        </section> */}
 
         {/* Agent Visualizer Component */}
         <section className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold">Agent Visualizer</h2>
             <p className="text-muted-foreground text-sm">
-              An animated agent visualizer component that displays Lottie animations for different agent states
+              An animated agent visualizer component that displays Lottie
+              animations for different agent states
             </p>
           </div>
           <div className="rounded-lg border p-6">
@@ -145,7 +144,7 @@ export default function ComponentsPage() {
         </section>
 
         {/* Conversation Component */}
-        <section className="space-y-4">
+        {/* <section className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold">Conversation</h2>
             <p className="text-muted-foreground text-sm">
@@ -155,10 +154,10 @@ export default function ComponentsPage() {
           <div className="rounded-lg border p-6">
             <ConversationDemo />
           </div>
-        </section>
+        </section> */}
 
         {/* Component Stats */}
-        <section className="space-y-4 border-t pt-8">
+        {/* <section className="space-y-4 border-t pt-8">
           <h2 className="text-2xl font-bold">Component Stats</h2>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             <div className="rounded-lg bg-card p-4">
@@ -178,7 +177,7 @@ export default function ComponentsPage() {
               <p className="text-2xl font-bold">17</p>
             </div>
           </div>
-        </section>
+        </section> */}
       </div>
     </main>
   )
