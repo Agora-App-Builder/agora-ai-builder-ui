@@ -1,0 +1,6 @@
+{
+  "$schema": "https://vercel.com/schemas/vercel.json",
+  "buildCommand": "pnpm registry:build && pnpm build",
+  "outputDirectory": ".next",
+  "framework": "nextjs"
+}

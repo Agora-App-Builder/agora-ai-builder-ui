@@ -38,6 +38,11 @@ yarn-error.log*
 
 tsconfig.tsbuildinfo
 
+# Generated registry files (built on Vercel, not committed to git)
+apps/www/public/r/
+apps/www/registry.json
+apps/www/registry/__index__.tsx
+
 # ide
 .idea
 .fleet
