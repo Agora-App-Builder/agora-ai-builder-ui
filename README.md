@@ -96,5 +96,5 @@ App Level Scripts (apps/www)
 For issues, feature requests, or questions:
 
 - Open an [issue](../../issues) on GitHub
-- Check the [documentation](./apps/www) in the docs folder
-- Review component examples in the demo app
+<!-- - Check the [documentation](./apps/www) in the docs folder -->
+- Review component examples in the examples folder
