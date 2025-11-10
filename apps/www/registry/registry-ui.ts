@@ -29,6 +29,22 @@ export const ui: Registry["items"] = [
     ],
   },
   {
+    name: "icon-button",
+    description:
+      "A compact icon button component with shape variants (round, square) and style variants (filled, outlined, standard)",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/icon-button.tsx",
+        type: "registry:ui",
+      },
+      {
+        path: "examples/icon-button-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
     name: "popover",
     description: "A popover component built with Radix UI",
     type: "registry:ui",
@@ -129,13 +145,22 @@ export const ui: Registry["items"] = [
   {
     name: "mic-selector",
     description:
-      "A button with dropdown menu for selecting items, with mic icon and states",
+      "A microphone selector component with dropdown for device selection, mute toggle, and waveform preview",
     type: "registry:ui",
-    registryDependencies: ["button", "dropdown-menu", "mic-button"],
+    registryDependencies: [
+      "button",
+      "dropdown-menu",
+      "mic-button",
+      "live-waveform",
+    ],
     files: [
       {
         path: "ui/mic-selector.tsx",
         type: "registry:ui",
+      },
+      {
+        path: "hooks/use-audio-devices.ts",
+        type: "registry:hook",
       },
       {
         path: "examples/mic-selector-demo.tsx",

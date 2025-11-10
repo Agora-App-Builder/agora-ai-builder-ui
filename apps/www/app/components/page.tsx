@@ -5,11 +5,13 @@ import ButtonDemo from "@/registry/agora-ui/examples/button-demo"
 import CardDemo from "@/registry/agora-ui/examples/card-demo"
 import ChipDemo from "@/registry/agora-ui/examples/chip-demo"
 import ConversationDemo from "@/registry/agora-ui/examples/conversation-demo"
+import CustomIconsDemo from "@/registry/agora-ui/examples/custom-icons-demo"
 import LiveWaveformDemo from "@/registry/agora-ui/examples/live-waveform-demo"
 import MicButtonDemo from "@/registry/agora-ui/examples/mic-button-demo"
 import MicSelectorDemo from "@/registry/agora-ui/examples/mic-selector-demo"
 import ThemeDemoComponent from "@/registry/agora-ui/examples/theme-demo"
 
+import { IconButtonDemo } from "../../registry/agora-ui/examples/icon-button-demo"
 import { ThemeToggle } from "./theme-toggle"
 
 export default function ComponentsPage() {
@@ -27,6 +29,14 @@ export default function ComponentsPage() {
         </div>
 
         {/* Button Component */}
+        <section className="space-y-4">
+          <div>
+            <h2 className="text-2xl font-bold">Icon Button</h2>
+          </div>
+          <div className="rounded-lg border p-6">
+            <IconButtonDemo />
+          </div>
+        </section>
         <section className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold">Button</h2>
@@ -51,32 +61,47 @@ export default function ComponentsPage() {
         </section>
 
         {/* Theme Demo */}
-        <section className="space-y-4">
+        {/* <section className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold">Dynamic Theme</h2>
             <p className="text-muted-foreground text-sm">
               Test the theme system by switching between different primary brand
-              colors. This demonstrates how consuming apps can apply custom colors
-              from their API at runtime.
+              colors. This demonstrates how consuming apps can apply custom
+              colors from their API at runtime.
             </p>
           </div>
           <div className="rounded-lg border p-6">
             <ThemeDemoComponent />
           </div>
-        </section>
+        </section> */}
+
+        {/* Custom Icons */}
+        {/* <section className="space-y-4">
+          <div>
+            <h2 className="text-2xl font-bold">Custom Icons</h2>
+            <p className="text-muted-foreground text-sm">
+              Learn how to use custom SVG icons in your components with Tailwind
+              CSS for sizing and colors
+            </p>
+          </div>
+          <div className="rounded-lg border p-6">
+            <CustomIconsDemo />
+          </div>
+        </section> */}
 
         {/* Chip Component */}
-        {/* <section className="space-y-4">
+        <section className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold">Chip</h2>
             <p className="text-muted-foreground text-sm">
-              A flexible wrapper component with rounded pill-shaped background for grouping controls
+              A flexible wrapper component with rounded pill-shaped background
+              for grouping controls
             </p>
           </div>
           <div className="rounded-lg border p-6">
             <ChipDemo />
           </div>
-        </section> */}
+        </section>
 
         {/* Agent Picker Component */}
         {/* <section className="space-y-4">

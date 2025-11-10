@@ -1,163 +1,267 @@
 "use client"
 
-import * as React from "react"
+import { useState, useEffect, useRef, type HTMLAttributes } from "react"
 
 import { cn } from "@/lib/utils"
 
-export interface LiveWaveformProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Whether the waveform is actively animating
-   * @default false
-   */
+export type LiveWaveformProps = HTMLAttributes<HTMLDivElement> & {
   active?: boolean
-
-  /**
-   * Width of each bar in pixels
-   * @default 2
-   */
+  data?: number[]
+  deviceId?: string
+  fftSize?: number
+  smoothingTimeConstant?: number
+  sensitivity?: number
   barWidth?: number
-
-  /**
-   * Gap between bars in pixels
-   * @default 1
-   */
   barGap?: number
-
-  /**
-   * Color of the bars (hex, rgb, or color name)
-   * @default "#3b82f6"
-   */
+  barRadius?: number
   barColor?: string
-
-  /**
-   * Height of the waveform container in pixels
-   * @default 20
-   */
-  height?: number
-
-  /**
-   * Whether to fade the edges of the waveform
-   * @default true
-   */
   fadeEdges?: boolean
+  fadeWidth?: number
+  height?: string | number
+  onError?: (error: Error) => void
 }
 
-export const LiveWaveform = React.forwardRef<HTMLDivElement, LiveWaveformProps>(
-  (
-    {
-      active = false,
-      barWidth = 2,
-      barGap = 1,
-      barColor = "#3b82f6",
-      height = 20,
-      fadeEdges = true,
-      className,
-      ...props
-    },
-    ref
-  ) => {
-    // Generate 12 bars for compact waveform (matches eleven labs style)
-    const barCount = 12
-    const bars = Array.from({ length: barCount }, (_, i) => i)
+export const LiveWaveform = ({
+  active = false,
+  data: externalData,
+  deviceId,
+  fftSize = 256,
+  smoothingTimeConstant = 0.8,
+  sensitivity = 1,
+  barWidth = 3,
+  barGap = 1,
+  barRadius = 1.5,
+  barColor,
+  fadeEdges = true,
+  fadeWidth = 24,
+  height = 64,
+  onError,
+  className,
+  ...props
+}: LiveWaveformProps) => {
+  const [data, setData] = useState<number[]>(externalData || [])
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const analyserRef = useRef<AnalyserNode | null>(null)
+  const audioContextRef = useRef<AudioContext | null>(null)
+  const streamRef = useRef<MediaStream | null>(null)
+  const animationIdRef = useRef<number | null>(null)
 
-    const getBarHeight = (index: number): number => {
-      if (!active) {
-        return 0.2 // Minimal height when inactive
+  const heightStyle = typeof height === "number" ? `${height}px` : height
+
+  // Canvas setup and resizing
+  useEffect(() => {
+    const canvas = canvasRef.current
+    const container = containerRef.current
+    if (!canvas || !container) return
+
+    const resizeObserver = new ResizeObserver(() => {
+      const rect = container.getBoundingClientRect()
+      const dpr = window.devicePixelRatio || 1
+
+      canvas.width = rect.width * dpr
+      canvas.height = rect.height * dpr
+      canvas.style.width = `${rect.width}px`
+      canvas.style.height = `${rect.height}px`
+
+      const ctx = canvas.getContext("2d")
+      if (ctx) {
+        ctx.scale(dpr, dpr)
       }
+    })
 
-      // Create smooth wave animation using sine wave
-      // Each bar has a different phase for cascading effect
-      const phase = (index / barCount) * Math.PI * 2
-      const time = Date.now() / 1000
-      const waveValue = Math.sin(phase + time * 3) // 3 is the speed
-      // Map sine wave from [-1, 1] to [0.2, 1] for visual effect
-      return 0.2 + ((waveValue + 1) / 2) * 0.8
+    resizeObserver.observe(container)
+    return () => resizeObserver.disconnect()
+  }, [])
+
+  // Microphone setup and frequency data extraction
+  useEffect(() => {
+    if (!active) {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => track.stop())
+      }
+      if (audioContextRef.current && audioContextRef.current.state !== "closed") {
+        audioContextRef.current.close()
+      }
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current)
+      }
+      return
     }
 
-    return (
-      <div
-        ref={ref}
-        className={cn("inline-flex items-end justify-center", className)}
-        style={{
-          height: `${height}px`,
-          gap: `${barGap}px`,
-          position: "relative",
-        }}
-        {...props}
-      >
-        <style>{`
-          @keyframes smoothWave {
-            0% {
-              transform: scaleY(0.2);
-            }
-            25% {
-              transform: scaleY(0.8);
-            }
-            50% {
-              transform: scaleY(1);
-            }
-            75% {
-              transform: scaleY(0.4);
-            }
-            100% {
-              transform: scaleY(0.2);
-            }
+    const setupMicrophone = async () => {
+      try {
+        const audioConstraints: MediaTrackAudioConstraints = {
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: true,
+        }
+
+        if (deviceId) {
+          audioConstraints.deviceId = deviceId
+        }
+
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: audioConstraints,
+        })
+        streamRef.current = stream
+
+        const AudioContextConstructor =
+          window.AudioContext ||
+          (window as unknown as { webkitAudioContext: typeof AudioContext })
+            .webkitAudioContext
+        const audioContext = new AudioContextConstructor()
+        const analyser = audioContext.createAnalyser()
+        analyser.fftSize = fftSize
+        analyser.smoothingTimeConstant = smoothingTimeConstant
+
+        const source = audioContext.createMediaStreamSource(stream)
+        source.connect(analyser)
+
+        audioContextRef.current = audioContext
+        analyserRef.current = analyser
+
+        const dataArray = new Uint8Array(analyser.frequencyBinCount)
+
+        const updateData = () => {
+          if (!analyserRef.current || !active) return
+
+          analyserRef.current.getByteFrequencyData(dataArray)
+
+          const startFreq = Math.floor(dataArray.length * 0.05)
+          const endFreq = Math.floor(dataArray.length * 0.4)
+          const relevantData = dataArray.slice(startFreq, endFreq)
+
+          const halfLength = Math.floor(relevantData.length / 2)
+          const normalizedData: number[] = []
+
+          // Mirror the data for symmetric center-aligned display
+          for (let i = halfLength - 1; i >= 0; i--) {
+            const value = Math.min(1, (relevantData[i] / 255) * sensitivity)
+            normalizedData.push(value)
           }
 
-          .live-waveform-bar {
-            flex-shrink: 0;
-            background-color: ${barColor};
-            border-radius: 2px;
-            transform-origin: bottom;
-            transition: ${active ? "none" : "transform 0.3s ease-out"};
+          for (let i = 0; i < halfLength; i++) {
+            const value = Math.min(1, (relevantData[i] / 255) * sensitivity)
+            normalizedData.push(value)
           }
 
-          .live-waveform-bar.active {
-            animation: smoothWave 0.8s ease-in-out infinite;
-          }
+          setData(normalizedData)
+          animationIdRef.current = requestAnimationFrame(updateData)
+        }
 
-          ${
-            fadeEdges
-              ? `
-            .live-waveform-container::before,
-            .live-waveform-container::after {
-              content: '';
-              position: absolute;
-              top: 0;
-              bottom: 0;
-              width: 20px;
-              pointer-events: none;
-            }
+        updateData()
+      } catch (error) {
+        onError?.(error as Error)
+      }
+    }
 
-            .live-waveform-container::before {
-              left: 0;
-              background: linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent);
-            }
+    setupMicrophone()
 
-            .live-waveform-container::after {
-              right: 0;
-              background: linear-gradient(to left, rgba(255, 255, 255, 0.8), transparent);
-            }
-          `
-              : ""
-          }
-        `}</style>
+    return () => {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => track.stop())
+      }
+      if (audioContextRef.current && audioContextRef.current.state !== "closed") {
+        audioContextRef.current.close()
+      }
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current)
+      }
+    }
+  }, [active, deviceId, fftSize, smoothingTimeConstant, sensitivity, onError])
 
-        {bars.map((i) => (
-          <div
-            key={i}
-            className={cn("live-waveform-bar", { active })}
-            style={{
-              width: `${barWidth}px`,
-              height: `${height * getBarHeight(i)}px`,
-              animationDelay: `${(i / barCount) * 0.8}s`,
-            }}
-          />
-        ))}
-      </div>
-    )
-  }
-)
+  // Update data from external source if provided
+  useEffect(() => {
+    if (externalData) {
+      setData(externalData)
+    }
+  }, [externalData])
 
-LiveWaveform.displayName = "LiveWaveform"
+  // Canvas rendering
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    let rafId: number
+
+    const animate = () => {
+      const rect = canvas.getBoundingClientRect()
+      ctx.clearRect(0, 0, rect.width, rect.height)
+
+      const computedBarColor =
+        barColor ||
+        (() => {
+          const style = getComputedStyle(canvas)
+          const color = style.color
+          return color || "#000"
+        })()
+
+      const step = barWidth + barGap
+      const barCount = Math.floor(rect.width / step)
+      const centerY = rect.height / 2
+
+      // Render bars from data
+      for (let i = 0; i < barCount && i < data.length; i++) {
+        const value = data[i] || 0.05
+        const x = i * step
+        const barHeight = Math.max(4, value * rect.height * 0.8)
+        const y = centerY - barHeight / 2
+
+        ctx.fillStyle = computedBarColor
+        ctx.globalAlpha = 0.4 + value * 0.6
+
+        if (barRadius > 0) {
+          ctx.beginPath()
+          ctx.roundRect(x, y, barWidth, barHeight, barRadius)
+          ctx.fill()
+        } else {
+          ctx.fillRect(x, y, barWidth, barHeight)
+        }
+      }
+
+      // Apply edge fading
+      if (fadeEdges && fadeWidth > 0 && rect.width > 0) {
+        const gradient = ctx.createLinearGradient(0, 0, rect.width, 0)
+        const fadePercent = Math.min(0.3, fadeWidth / rect.width)
+
+        gradient.addColorStop(0, "rgba(255,255,255,1)")
+        gradient.addColorStop(fadePercent, "rgba(255,255,255,0)")
+        gradient.addColorStop(1 - fadePercent, "rgba(255,255,255,0)")
+        gradient.addColorStop(1, "rgba(255,255,255,1)")
+
+        ctx.globalCompositeOperation = "destination-out"
+        ctx.fillStyle = gradient
+        ctx.fillRect(0, 0, rect.width, rect.height)
+        ctx.globalCompositeOperation = "source-over"
+      }
+
+      ctx.globalAlpha = 1
+      rafId = requestAnimationFrame(animate)
+    }
+
+    rafId = requestAnimationFrame(animate)
+
+    return () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId)
+      }
+    }
+  }, [data, barWidth, barGap, barRadius, barColor, fadeEdges, fadeWidth])
+
+  return (
+    <div
+      className={cn("relative h-full w-full", className)}
+      ref={containerRef}
+      style={{ height: heightStyle }}
+      aria-label={active ? "Live audio waveform" : "Audio waveform idle"}
+      role="img"
+      {...props}
+    >
+      <canvas className="block h-full w-full" ref={canvasRef} aria-hidden="true" />
+    </div>
+  )
+}
