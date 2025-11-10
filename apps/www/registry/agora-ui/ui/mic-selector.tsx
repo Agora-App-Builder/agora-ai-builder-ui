@@ -1,27 +1,28 @@
 "use client"
 
-import * as React from "react"
+import { useCallback, useEffect, useState } from "react"
 import { Check, ChevronDown, Mic, MicOff } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useAudioDevices } from "@/registry/agora-ui/hooks/use-audio-devices"
+import { Button } from "@/registry/agora-ui/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/registry/agora-ui/ui/dropdown-menu"
+import { IconButton } from "@/registry/agora-ui/ui/icon-button"
 import { LiveWaveform } from "@/registry/agora-ui/ui/live-waveform"
 import type { MicButtonState } from "@/registry/agora-ui/ui/mic-button"
 
-export interface SelectItem {
-  value: string
-  label: string
-}
+import { Chip } from "./chip"
 
 export interface MicSelectorProps {
-  items: SelectItem[]
   value?: string
-  onValueChange?: (value: string) => void
+  onValueChange?: (deviceId: string) => void
+  muted?: boolean
+  onMutedChange?: (muted: boolean) => void
   disabled?: boolean
   className?: string
   /**
@@ -37,80 +38,146 @@ export interface MicSelectorProps {
 }
 
 export function MicSelector({
-  items,
   value,
   onValueChange,
+  muted,
+  onMutedChange,
   disabled = false,
   className,
-  state = "idle",
   showErrorBadge = false,
 }: MicSelectorProps) {
-  const isListening = state === "listening"
-  const isProcessing = state === "processing"
-  const isError = state === "error"
-  const isActive = isListening || isProcessing
+  const [state, setState] = useState<
+    "idle" | "listening" | "success" | "error"
+  >("idle")
+  const { devices, loading, error, hasPermission, loadDevices } =
+    useAudioDevices()
+  const [selectedDevice, setSelectedDevice] = useState<string>(value || "")
+  const [internalMuted, setInternalMuted] = useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
+  // Use controlled muted if provided, otherwise use internal state
+  const isMuted = muted !== undefined ? muted : internalMuted
+
+  // console.log("supriya state: ", state)
+  // console.log("supriya error: ", error)
+  // console.log("supriya hasPermission: ", hasPermission)
+
+  // Update internal state when controlled value changes
+  useEffect(() => {
+    if (value !== undefined) {
+      setSelectedDevice(value)
+    }
+  }, [value])
+
+  // Select first device by default
+  const defaultDeviceId = devices[0]?.deviceId || ""
+  useEffect(() => {
+    if (!selectedDevice && defaultDeviceId) {
+      const newDevice = defaultDeviceId
+      setSelectedDevice(newDevice)
+      onValueChange?.(newDevice)
+    }
+  }, [defaultDeviceId, selectedDevice, onValueChange])
+
+  const currentDevice = devices.find((d) => d.deviceId === selectedDevice) ||
+    devices[0] || {
+      label: loading ? "Loading..." : "No microphone",
+      deviceId: "",
+    }
+
+  const handleDeviceSelect = (deviceId: string, e?: React.MouseEvent) => {
+    e?.preventDefault()
+    setSelectedDevice(deviceId)
+    onValueChange?.(deviceId)
+  }
+
+  const handleDropdownOpenChange = async (open: boolean) => {
+    setIsDropdownOpen(open)
+    if (open && !hasPermission && !loading) {
+      await loadDevices()
+    }
+  }
+
+  const toggleMute = () => {
+    const newMuted = !isMuted
+    if (muted === undefined) {
+      setInternalMuted(newMuted)
+    }
+    onMutedChange?.(newMuted)
+  }
+
+  const isError = state === "error" || !hasPermission
+  const showWaveform = !isMuted
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button
-          disabled={disabled || items.length === 0 || isError}
-          className={cn(
-            "relative inline-flex items-center justify-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-medium transition-colors",
-            // Idle and active states
-            !isError &&
-              "border-input bg-background hover:bg-accent focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
-            // Error state
-            isError &&
-              "border-destructive bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:ring-destructive cursor-not-allowed focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
-            // Disabled
-            (disabled || items.length === 0) && "cursor-not-allowed opacity-50",
-            className
-          )}
+    <Chip>
+      <div>
+        <IconButton
+          onClick={toggleMute}
+          shape="round"
+          variant="standard"
+          size={"sm"}
+          disabled={isError}
         >
-          {isError ? (
-            <MicOff className="h-4 w-4" />
+          {isMuted || isError ? (
+            <MicOff className="text-error size-4" />
           ) : (
-            <Mic className="h-4 w-4" />
+            <Mic className="size-4" />
           )}
-          {isActive && (
-            <LiveWaveform
-              active={isListening}
-              barColor={isProcessing ? "#94a3b8" : "#3b82f6"}
-              fadeEdges={false}
-            />
-          )}
-          <ChevronDown className="h-4 w-4 flex-shrink-0" />
-
-          {/* Error badge - orange circle with exclamation */}
-          {isError && showErrorBadge && (
-            <div className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-amber-400 text-amber-900">
-              <span className="text-xs leading-none font-bold">!</span>
-            </div>
-          )}
-        </button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" side="top" className="w-72">
-        {items.length === 0 ? (
-          <div className="text-muted-foreground py-6 text-center text-sm">
-            No items available
+        </IconButton>
+        {isError && (
+          <div className="bg-warning absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full">
+            <span className="text-font text-xs leading-none font-bold">!</span>
           </div>
-        ) : (
-          items.map((item) => (
-            <DropdownMenuItem
-              key={item.value}
-              onClick={() => onValueChange?.(item.value)}
-              className="flex items-center justify-between"
-              disabled={state === "processing" || state === "error"}
-            >
-              <span className="truncate">{item.label}</span>
-              {value === item.value && (
-                <Check className="h-4 w-4 flex-shrink-0" />
-              )}
-            </DropdownMenuItem>
-          ))
         )}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </div>
+      <div className="w-10">
+        <LiveWaveform
+          active={!muted}
+          deviceId={selectedDevice || defaultDeviceId}
+          height={15}
+          barWidth={3}
+          barGap={1}
+        />
+      </div>
+      <DropdownMenu onOpenChange={handleDropdownOpenChange}>
+        <DropdownMenuTrigger asChild>
+          <ChevronDown className="size-6 flex-shrink-0" />
+        </DropdownMenuTrigger>
+
+        <DropdownMenuContent align="center" side="top" className="w-72">
+          {loading ? (
+            <div className="text-muted-foreground px-4 py-3 text-center text-sm">
+              Loading devices...
+            </div>
+          ) : error ? (
+            <div className="text-error px-4 py-3 text-center text-sm">
+              Error: {error}
+            </div>
+          ) : devices.length === 0 ? (
+            <div className="text-muted-foreground px-4 py-3 text-center text-sm">
+              No microphones available
+            </div>
+          ) : (
+            <>
+              {devices.map((device) => (
+                <DropdownMenuItem
+                  key={device.deviceId}
+                  onClick={(e) => handleDeviceSelect(device.deviceId, e)}
+                  onSelect={(e) => e.preventDefault()}
+                  className="flex cursor-pointer items-center justify-between"
+                  disabled={loading && isError}
+                >
+                  <span className="truncate">{device.label}</span>
+                  {selectedDevice === device.deviceId && (
+                    <Check className="size-5 flex-shrink-0" />
+                  )}
+                </DropdownMenuItem>
+              ))}
+            </>
+          )}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </Chip>
   )
 }

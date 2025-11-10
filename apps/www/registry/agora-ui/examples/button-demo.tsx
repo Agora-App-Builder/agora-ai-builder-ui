@@ -1,64 +1,20 @@
 "use client"
 
-import { Mic, X } from "lucide-react"
+import { Mic, Copy, Trash2 } from "lucide-react"
 
 import { Button } from "@/registry/agora-ui/ui/button"
 
 export default function ButtonDemo() {
   return (
     <div className="w-full max-w-4xl space-y-8">
-      {/* Rounded Prop */}
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Rounded Prop (boolean)</h3>
-        <div className="space-y-4">
-          <div>
-            <p className="text-muted-foreground mb-2 text-sm">
-              Icon Only - Circular (rounded=true)
-            </p>
-            <div className="flex items-center gap-3">
-              <Button size="icon" rounded variant="default">
-                <Mic className="size-6" />
-              </Button>
-              <Button size="icon" rounded variant="destructive">
-                <X className="size-6" />
-              </Button>
-              <Button size="icon" rounded variant="secondary">
-                <Mic className="size-6" />
-              </Button>
-            </div>
-          </div>
-          <div>
-            <p className="text-muted-foreground mb-2 text-sm">
-              With Text - Pill Shape (rounded=true)
-            </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <Button rounded variant="default">
-                <Mic className="h-4 w-4" />
-                Recording
-              </Button>
-              <Button rounded variant="secondary">
-                Submit
-              </Button>
-            </div>
-          </div>
-          <div>
-            <p className="text-muted-foreground mb-2 text-sm">
-              Default Rounded (rounded=false)
-            </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <Button variant="default">
-                <Mic className="h-4 w-4" />
-                Default
-              </Button>
-              <Button variant="secondary">Secondary</Button>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Variants */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Variants</h3>
+        <div className="space-y-2">
+          <h3 className="text-foreground text-sm font-semibold">Variants</h3>
+          <p className="text-muted-foreground text-xs">
+            Three style variants for different use cases
+          </p>
+        </div>
         <div className="flex flex-wrap items-center gap-3">
           <Button variant="default">Default</Button>
           <Button variant="secondary">Secondary</Button>
@@ -66,23 +22,102 @@ export default function ButtonDemo() {
         </div>
       </div>
 
-      {/* Sizes */}
+      {/* With Icons */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Sizes</h3>
+        <div className="space-y-2">
+          <h3 className="text-foreground text-sm font-semibold">
+            With Icons
+          </h3>
+          <p className="text-muted-foreground text-xs">
+            Buttons can include icons alongside text
+          </p>
+        </div>
         <div className="flex flex-wrap items-center gap-3">
-          <Button size="default">Default</Button>
+          <Button variant="default">
+            <Mic className="size-4" />
+            Record
+          </Button>
+          <Button variant="secondary">
+            <Copy className="size-4" />
+            Copy
+          </Button>
+          <Button variant="destructive">
+            <Trash2 className="size-4" />
+            Delete
+          </Button>
         </div>
       </div>
 
       {/* Disabled State */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Disabled State</h3>
+        <div className="space-y-2">
+          <h3 className="text-foreground text-sm font-semibold">
+            Disabled State
+          </h3>
+          <p className="text-muted-foreground text-xs">
+            Buttons can be disabled to prevent interaction
+          </p>
+        </div>
         <div className="flex flex-wrap items-center gap-3">
           <Button disabled>Default Disabled</Button>
+          <Button variant="secondary" disabled>
+            Secondary Disabled
+          </Button>
           <Button variant="destructive" disabled>
             Destructive Disabled
           </Button>
         </div>
+      </div>
+
+      {/* With Label */}
+      <div className="space-y-4">
+        <div className="space-y-2">
+          <h3 className="text-foreground text-sm font-semibold">
+            With Label
+          </h3>
+          <p className="text-muted-foreground text-xs">
+            Optional label prop below button text
+          </p>
+        </div>
+        <div className="flex flex-wrap items-center gap-6">
+          <Button label="Click me">Default</Button>
+          <Button variant="secondary" label="Submit form">
+            <Mic className="size-4" />
+            Submit
+          </Button>
+        </div>
+      </div>
+
+      {/* Usage Reference */}
+      <div className="bg-accent/5 space-y-4 rounded-lg p-4">
+        <h3 className="text-foreground text-sm font-semibold">Usage</h3>
+        <pre className="bg-muted text-muted-foreground overflow-x-auto rounded p-3 text-xs">
+          {`import { Button } from "@/registry/agora-ui/ui/button"
+import { Mic } from "lucide-react"
+
+export function MyComponent() {
+  return (
+    <>
+      {/* Variant - default, secondary, destructive */}
+      <Button variant="default">Default</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="destructive">Delete</Button>
+
+      {/* With Icon */}
+      <Button>
+        <Mic className="size-4" />
+        Record
+      </Button>
+
+      {/* With Label */}
+      <Button label="Click to submit">Submit</Button>
+
+      {/* Disabled */}
+      <Button disabled>Disabled</Button>
+    </>
+  )
+}`}
+        </pre>
       </div>
 
       {/* Props Reference */}
@@ -94,14 +129,15 @@ export default function ButtonDemo() {
             (default: "default")
           </div>
           <div>
-            <strong>size:</strong> "default" | "icon" (default: "default")
-            <div className="mt-1 ml-0 text-xs">
-              Note: Icons inside size="icon" auto-scale to size-6 (24×24px)
-            </div>
+            <strong>size:</strong> "default" (default: "default")
           </div>
           <div>
-            <strong>rounded:</strong> boolean - true for fully rounded
-            (pill/circle), false for default rounded corners (default: false)
+            <strong>label:</strong> string - optional text displayed below button
+            (default: undefined)
+          </div>
+          <div>
+            <strong>labelClassName:</strong> string - custom classes for label
+            (default: undefined)
           </div>
           <div>
             <strong>disabled:</strong> boolean - disables the button (default:

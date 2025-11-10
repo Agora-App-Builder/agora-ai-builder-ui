@@ -34,7 +34,7 @@
 
   /* Base and brand */
   --color-background: var(--background-color);
-  --color-foreground: var(--font-color);
+  --color-foreground: var(--color-font);
   --color-popover: var(--card-layer-one-color);
   --color-popover-foreground: var(--color-font-high);
   --color-primary: var(--primary-action-brand-color);

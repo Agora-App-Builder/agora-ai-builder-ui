@@ -9,7 +9,7 @@ export const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
     return (
       <div
         ref={ref}
-        className="inline-flex items-center justify-center gap-2 rounded-full bg-black/40 px-4 py-3 backdrop-blur-sm"
+        className="bg-card-layer-1 relative inline-flex items-center justify-center gap-2 rounded-full p-3"
         {...props}
       >
         {children}
