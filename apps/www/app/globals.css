@@ -33,7 +33,7 @@
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
+  --color-primary: var(--primary-brand);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -42,72 +42,39 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+  --color-warning: var(--semantic-warning);
+  --color-error: var(--semantic-error);
+  --color-success: var(--semantic-success);
+  --color-neutral: var(--semantic-neutral);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
   /* Fonts */
+  --color-font: var(--font);
   --color-font-high: var(--font-high);
   --color-font-medium: var(--font-medium);
   --color-font-low: var(--font-low);
+  /* UI Colors */
+  --color-icon-bg: var(--icon-bg);
+  --color-toolbar: var(--toolbar-color);
+  --color-input-field-bg: var(--input-field-bg);
+  --color-input-field-border: var(--input-field-border);
+  /* Cards */
+  --color-card-layer-1: var(--card_layer_1);
+  --color-card-layer-2: var(--card_layer_2);
+  --color-card-layer-3: var(--card_layer_3);
+  --color-card-layer-4: var(--card_layer_4);
+  --color-card-layer-5: var(--card_layer_5);
+  /* Video Tiles */
+  --color-video-tile: var(--video-tile);
+  --color-video-tile-overlay: var(--video-tile-overlay);
+  --color-video-tile-text: var(--video-tile-text);
+  --color-video-tile-avatar: var(--video-tile-avatar);
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #111111;
-  --border: #333333;
-  --card: #ffffff;
-  --card-foreground: #33333366;
-  /*
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0); 
-  */
-
-  /* Agora Brand colors from config */
-  /* Brand Actions */
-  --primary: #099dfd;
-  --primary-foreground: #ffffff;
-  --secondary: #f8f3f1;
-  --secondary-foreground: #19394d;
-  /* Font */
-  --font-rgb: 51, 51, 51;
-  --font: rgba(var(--font-rgb), 1); /* same as high */
-  --font-medium: rgba(var(--font-rgb), 0.7);
-  --font-low: rgba(var(--font-rgb), 0.4);
-  /* Icon */
-  --icon-bg: #ebf1f5;
-  /* Cards */
-  --card_layer_1: #ffffff; /* CARD_LAYER_1_COLOR */
-  --card_layer_2: #f0f0f0; /* CARD_LAYER_2_COLOR */
-  --card_layer_3: #e3e3e3; /* CARD_LAYER_3_COLOR */
-  --card_layer_4: #ffffff; /* CARD_LAYER_4_COLOR */
-  --card_layer_5: #808080; /* CARD_LAYER_5_COLOR */
-  /* Video Tile */
-  --video-tile: #222222;
-  --video-tile-overlay: #80808080;
-  --video-tile-text: #ffffff;
-  --video-tile-avatar: #446881;
-  /* State */
-  --semantic-error: #ff414d;
-  --semantic-success: #36b37e;
-  --semantic-warning: #ffab00;
-  --semantic-neutral: #808080;
-  --destructive: var(--semantic-error);
-}
-
-.dark {
   --background: #111111;
   --foreground: #ffffff;
-  --border: #262626;
-  --card: #181818;
-  --card-foreground: #ffffff66;
   /*
   --popover: oklch(0.269 0 0);
   --popover-foreground: oklch(0.985 0 0);
@@ -120,38 +87,50 @@
   --accent: oklch(0.371 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0); 
   */
-  /* Agora Brand colors from config */ /* Brand Actions */
+  /* Agora Brand colors from config */
+  /* Brand Actions */
   --primary: #099dfd;
+  --primary-brand: #099dfd; /* PRIMARY_ACTION_BRAND_COLOR */
   --primary-foreground: #ffffff;
   --secondary: #212121;
   --secondary-foreground: #ffffff;
+  --secondary-action: #ffffff; /* SECONDARY_ACTION_COLOR */
   /* Font */
   --font-rgb: 255, 255, 255;
   --font: rgba(var(--font-rgb), 1);
+  --font-high: rgba(var(--font-rgb), 1); /* PRIMARY_FONT_COLOR */
   --font-medium: rgba(var(--font-rgb), 0.7);
   --font-low: rgba(var(--font-rgb), 0.4);
   /* Icon */
-  --icon-bg: #242529;
+  --icon-bg: #242529; /* ICON_BG_COLOR */
+  --toolbar-color: #111111; /* TOOLBAR_COLOR */
+  /* Input Fields */
+  --input-field-bg: #181818; /* INPUT_FIELD_BACKGROUND_COLOR */
+  --input-field-border: #262626; /* INPUT_FIELD_BORDER_COLOR */
+  /* Borders */
+  --border: var(--input-field-border);
   /* Cards */
+  --card: var(--input-field-bg);
+  --card-foreground: var(--font-low);
+  --color-secondary-foreground: var(--secondary-action);
   --card_layer_1: #1d1d1d; /* CARD_LAYER_1_COLOR */
   --card_layer_2: #262626; /* CARD_LAYER_2_COLOR */
   --card_layer_3: #2d2d2d; /* CARD_LAYER_3_COLOR */
   --card_layer_4: #333333; /* CARD_LAYER_4_COLOR */
   --card_layer_5: #808080; /* CARD_LAYER_5_COLOR */
   /* Video Tile */
-  --video-tile: #222222;
-  --video-tile-overlay: #000004;
-  --video-tile-text: #ffffff;
-  --video-tile-avatar: #bdd0db;
+  --video-tile: #222222; /* VIDEO_AUDIO_TILE_COLOR */
+  --video-tile-overlay: #000004; /* VIDEO_AUDIO_TILE_OVERLAY_COLOR */
+  --video-tile-text: #ffffff; /* VIDEO_AUDIO_TILE_TEXT_COLOR */
+  --video-tile-avatar: #bdd0db; /* VIDEO_AUDIO_TILE_AVATAR_COLOR */
   /* State */
-  --semantic-error: #ff414d;
-  --semantic-success: #36b37e;
-  --semantic-warning: #ffab00;
-  --semantic-neutral: #808080;
+  --semantic-error: #ff414d; /* SEMANTIC_ERROR */
+  --semantic-success: #36b37e; /* SEMANTIC_SUCCESS */
+  --semantic-warning: #ffab00; /* SEMANTIC_WARNING */
+  --semantic-neutral: #808080; /* SEMANTIC_NEUTRAL */
   --destructive: var(--semantic-error);
 }
 
@@ -163,12 +142,5 @@
     @apply bg-background text-foreground;
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
-  }
-}
-
-@layer components {
-  /* Button icon auto-sizing */
-  button[class*="size-12"] svg:not([class*='size-']):not([class*='h-']):not([class*='w-']) {
-    @apply size-6;
   }
 }
