@@ -13,6 +13,21 @@
   --text-x-large: 1.5rem; /* 24px */
   --text-extra-large: 2rem; /* 32px */
 
+  /* Text emphasis (opacity or transparency levels) */
+  --opacity-high: 1;
+  --opacity-medium: 0.7;
+  --opacity-low: 0.4;
+  --opacity-disabled: 0.4;
+
+  /* Font shades */
+  --color-font: var(--font-color);
+  --color-font-primary: var(--primary-font-color);
+  --color-font-secondary: var(--secondary-font-color);
+  --color-font: var(--font);
+  --color-font-high: var(--font-high);
+  --color-font-medium: var(--font-medium);
+  --color-font-low: var(--font-low);
+
   /* Border Radius */
   --radius: 0.75rem; /* base = 12px (your lg) */
   --radius-sm: calc(var(--radius) - 0.5rem); /* 0.25rem → 4px */
@@ -20,118 +35,107 @@
   --radius-lg: var(--radius); /* 0.75rem → 12px */
   --radius-xl: calc(var(--radius) + 0.5rem); /* 1.25rem → 20px */
 
-  /* Text emphasis (opacity or transparency levels) */
-  --opacity-high: 1;
-  --opacity-medium: 0.85;
-  --opacity-low: 0.4;
-  --opacity-disabled: 0.4;
+  /* Base and brand */
+  --color-background: var(--background-color);
+  --color-foreground: var(--font-color);
+  --color-popover: var(--card-layer-one-color);
+  --color-popover-foreground: var(--font-high);
+  --color-primary: var(--primary-action-brand-color);
+  --color-primary-brand: var(--primary-action-brand-color);
+  --color-primary-foreground: var(--primary-action-text-color);
+  --color-secondary: var(--secondary-action-brand-color);
+  --color-secondary-foreground: var(--secondary-action-color);
+  --color-border: var(--input-field-border-color);
+  --color-input: var(--input-field-background-color);
+  --color-ring: var(--primary-action-brand-color);
 
-  /* Colors */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary-brand);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
+  /* Semantic */
+  --color-success: var(--semantic-success);
   --color-warning: var(--semantic-warning);
   --color-error: var(--semantic-error);
-  --color-success: var(--semantic-success);
   --color-neutral: var(--semantic-neutral);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  /* Fonts */
-  --color-font: var(--font);
-  --color-font-high: var(--font-high);
-  --color-font-medium: var(--font-medium);
-  --color-font-low: var(--font-low);
-  /* UI Colors */
-  --color-icon-bg: var(--icon-bg);
+  --color-destructive: var(--semantic-error);
+
+  /* Icon and toolbar */
+  --color-icon-bg: var(--icon-bg-color);
   --color-toolbar: var(--toolbar-color);
-  --color-input-field-bg: var(--input-field-bg);
-  --color-input-field-border: var(--input-field-border);
+
+  /* Input fields */
+  --color-input-field-bg: var(--input-field-background-color);
+  --color-input-field-border: var(--input-field-border-color);
+
   /* Cards */
-  --color-card-layer-1: var(--card_layer_1);
-  --color-card-layer-2: var(--card_layer_2);
-  --color-card-layer-3: var(--card_layer_3);
-  --color-card-layer-4: var(--card_layer_4);
-  --color-card-layer-5: var(--card_layer_5);
-  /* Video Tiles */
-  --color-video-tile: var(--video-tile);
-  --color-video-tile-overlay: var(--video-tile-overlay);
-  --color-video-tile-text: var(--video-tile-text);
-  --color-video-tile-avatar: var(--video-tile-avatar);
+  --color-card: var(--input-field-bg);
+  --color-card-foreground: var(--font-low);
+  --color-card-layer-1: var(--card-layer-one-color);
+  --color-card-layer-2: var(--card-layer-two-color);
+  --color-card-layer-3: var(--card-layer-three-color);
+  --color-card-layer-4: var(--card-layer-four-color);
+  --color-card-layer-5: var(--card-layer-five-color);
+
+  /* Video and audio tiles */
+  --color-video-tile: var(--video-audio-tile-color);
+  --color-video-tile-overlay: var(--video-audio-tile-overlay-color);
+  --color-video-tile-text: var(--video-audio-tile-text-color);
+  --color-video-tile-avatar: var(--video-audio-tile-avatar-color);
+
+  /* Misc */
+  --color-hard-black: var(--hard-coded-black-color);
+
+  /* --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted_foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent_foreground); */
 }
 
 :root {
-  --background: #111111;
-  --foreground: #ffffff;
-  /*
-  --popover: oklch(0.269 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.371 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0); 
-  */
-  /* Agora Brand colors from config */
-  /* Brand Actions */
-  --primary: #099dfd;
-  --primary-brand: #099dfd; /* PRIMARY_ACTION_BRAND_COLOR */
-  --primary-foreground: #ffffff;
-  --secondary: #212121;
-  --secondary-foreground: #ffffff;
-  --secondary-action: #ffffff; /* SECONDARY_ACTION_COLOR */
-  /* Font */
+  /* Base color */
+  --background-color: #111111;
+  --font-color: #ffffff;
   --font-rgb: 255, 255, 255;
   --font: rgba(var(--font-rgb), 1);
   --font-high: rgba(var(--font-rgb), 1); /* PRIMARY_FONT_COLOR */
   --font-medium: rgba(var(--font-rgb), 0.7);
   --font-low: rgba(var(--font-rgb), 0.4);
-  /* Icon */
-  --icon-bg: #242529; /* ICON_BG_COLOR */
-  --toolbar-color: #111111; /* TOOLBAR_COLOR */
-  /* Input Fields */
-  --input-field-bg: #181818; /* INPUT_FIELD_BACKGROUND_COLOR */
-  --input-field-border: #262626; /* INPUT_FIELD_BORDER_COLOR */
-  /* Borders */
-  --border: var(--input-field-border);
-  /* Cards */
-  --card: var(--input-field-bg);
-  --card-foreground: var(--font-low);
-  --color-secondary-foreground: var(--secondary-action);
-  --card_layer_1: #1d1d1d; /* CARD_LAYER_1_COLOR */
-  --card_layer_2: #262626; /* CARD_LAYER_2_COLOR */
-  --card_layer_3: #2d2d2d; /* CARD_LAYER_3_COLOR */
-  --card_layer_4: #333333; /* CARD_LAYER_4_COLOR */
-  --card_layer_5: #808080; /* CARD_LAYER_5_COLOR */
-  /* Video Tile */
-  --video-tile: #222222; /* VIDEO_AUDIO_TILE_COLOR */
-  --video-tile-overlay: #000004; /* VIDEO_AUDIO_TILE_OVERLAY_COLOR */
-  --video-tile-text: #ffffff; /* VIDEO_AUDIO_TILE_TEXT_COLOR */
-  --video-tile-avatar: #bdd0db; /* VIDEO_AUDIO_TILE_AVATAR_COLOR */
-  /* State */
-  --semantic-error: #ff414d; /* SEMANTIC_ERROR */
-  --semantic-success: #36b37e; /* SEMANTIC_SUCCESS */
-  --semantic-warning: #ffab00; /* SEMANTIC_WARNING */
-  --semantic-neutral: #808080; /* SEMANTIC_NEUTRAL */
-  --destructive: var(--semantic-error);
+
+  --primary-action-brand-color: #099dfd;
+  --primary-action-text-color: #ffffff;
+  --secondary-action-brand-color: #212121;
+  --secondary-action-color: #ffffff;
+  --hard-coded-black-color: #000000;
+
+  /* Typography */
+  --primary-font-color: #363636;
+  --secondary-font-color: #ffffff;
+  --landing-sub-heading: "The Real-Time Engagement Platform for meaningful human connections.";
+  --primary-logo: url("https://dl-prod.rteappbuilder.com/tluafed/5TWpUqsdC0BH6lPJ.jpeg");
+
+  /* Video and Audio Tiles */
+  --video-audio-tile-color: #222222;
+  --video-audio-tile-overlay-color: #00000040; /* 25% opacity black */
+  --video-audio-tile-text-color: #ffffff;
+  --video-audio-tile-avatar-color: #bdd0db;
+
+  /* Input fields */
+  --input-field-background-color: #181818;
+  --input-field-border-color: #262626;
+
+  /* Card layers */
+  --card-layer-one-color: #1d1d1d;
+  --card-layer-two-color: #262626;
+  --card-layer-three-color: #2d2d2d;
+  --card-layer-four-color: #333333;
+  --card-layer-five-color: #808080;
+
+  /* Toolbar and icons */
+  --icon-bg-color: #242529;
+  --toolbar-color: #111111;
+
+  /* Semantic */
+  --semantic-success: #36b37e;
+  --semantic-warning: #ffab00;
+  --semantic-error: #ff414d;
+  --semantic-neutral: #808080;
 }
 
 @layer base {
