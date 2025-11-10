@@ -1,11 +1,32 @@
 @import "tailwindcss";
 
 @theme inline {
-  --radius: 0.625rem;
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* Font families */
+  --font-sans: "Source Sans Pro", sans-serif;
+
+  /* Font sizes (in rems for scalability) */
+  --text-tiny: 0.75rem; /* 12px */
+  --text-small: 0.875rem; /* 14px */
+  --text-normal: 1rem; /* 16px */
+  --text-medium: 1.125rem; /* 18px */
+  --text-large: 1.25rem; /* 20px */
+  --text-x-large: 1.5rem; /* 24px */
+  --text-extra-large: 2rem; /* 32px */
+
+  /* Border Radius */
+  --radius: 0.75rem; /* base = 12px (your lg) */
+  --radius-sm: calc(var(--radius) - 0.5rem); /* 0.25rem → 4px */
+  --radius-md: calc(var(--radius) - 0.25rem); /* 0.5rem → 8px */
+  --radius-lg: var(--radius); /* 0.75rem → 12px */
+  --radius-xl: calc(var(--radius) + 0.5rem); /* 1.25rem → 20px */
+
+  /* Text emphasis (opacity or transparency levels) */
+  --opacity-high: 1;
+  --opacity-medium: 0.85;
+  --opacity-low: 0.4;
+  --opacity-disabled: 0.4;
+
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -24,34 +45,70 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  /* Fonts */
+  --color-font-high: var(--font-high);
+  --color-font-medium: var(--font-medium);
+  --color-font-low: var(--font-low);
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --background: #ffffff;
+  --foreground: #111111;
+  --border: #333333;
+  --card: #ffffff;
+  --card-foreground: #33333366;
+  /*
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.6773 0.1768 247.15);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: oklch(0.708 0 0); 
+  */
+
+  /* Agora Brand colors from config */
+  /* Brand Actions */
+  --primary: #099dfd;
+  --primary-foreground: #ffffff;
+  --secondary: #f8f3f1;
+  --secondary-foreground: #19394d;
+  /* Font */
+  --font-rgb: 51, 51, 51;
+  --font: rgba(var(--font-rgb), 1); /* same as high */
+  --font-medium: rgba(var(--font-rgb), 0.7);
+  --font-low: rgba(var(--font-rgb), 0.4);
+  /* Icon */
+  --icon-bg: #ebf1f5;
+  /* Cards */
+  --card_layer_1: #ffffff; /* CARD_LAYER_1_COLOR */
+  --card_layer_2: #f0f0f0; /* CARD_LAYER_2_COLOR */
+  --card_layer_3: #e3e3e3; /* CARD_LAYER_3_COLOR */
+  --card_layer_4: #ffffff; /* CARD_LAYER_4_COLOR */
+  --card_layer_5: #808080; /* CARD_LAYER_5_COLOR */
+  /* Video Tile */
+  --video-tile: #222222;
+  --video-tile-overlay: #80808080;
+  --video-tile-text: #ffffff;
+  --video-tile-avatar: #446881;
+  /* State */
+  --semantic-error: #ff414d;
+  --semantic-success: #36b37e;
+  --semantic-warning: #ffab00;
+  --semantic-neutral: #808080;
+  --destructive: var(--semantic-error);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.209 0 0);
-  --card-foreground: oklch(0.985 0 0);
+  --background: #111111;
+  --foreground: #ffffff;
+  --border: #262626;
+  --card: #181818;
+  --card-foreground: #ffffff66;
+  /*
   --popover: oklch(0.269 0 0);
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.922 0 0);
@@ -65,7 +122,37 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --ring: oklch(0.556 0 0); 
+  */
+  /* Agora Brand colors from config */ /* Brand Actions */
+  --primary: #099dfd;
+  --primary-foreground: #ffffff;
+  --secondary: #212121;
+  --secondary-foreground: #ffffff;
+  /* Font */
+  --font-rgb: 255, 255, 255;
+  --font: rgba(var(--font-rgb), 1);
+  --font-medium: rgba(var(--font-rgb), 0.7);
+  --font-low: rgba(var(--font-rgb), 0.4);
+  /* Icon */
+  --icon-bg: #242529;
+  /* Cards */
+  --card_layer_1: #1d1d1d; /* CARD_LAYER_1_COLOR */
+  --card_layer_2: #262626; /* CARD_LAYER_2_COLOR */
+  --card_layer_3: #2d2d2d; /* CARD_LAYER_3_COLOR */
+  --card_layer_4: #333333; /* CARD_LAYER_4_COLOR */
+  --card_layer_5: #808080; /* CARD_LAYER_5_COLOR */
+  /* Video Tile */
+  --video-tile: #222222;
+  --video-tile-overlay: #000004;
+  --video-tile-text: #ffffff;
+  --video-tile-avatar: #bdd0db;
+  /* State */
+  --semantic-error: #ff414d;
+  --semantic-success: #36b37e;
+  --semantic-warning: #ffab00;
+  --semantic-neutral: #808080;
+  --destructive: var(--semantic-error);
 }
 
 @layer base {
@@ -76,5 +163,12 @@
     @apply bg-background text-foreground;
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
+  }
+}
+
+@layer components {
+  /* Button icon auto-sizing */
+  button[class*="size-12"] svg:not([class*='size-']):not([class*='h-']):not([class*='w-']) {
+    @apply size-6;
   }
 }

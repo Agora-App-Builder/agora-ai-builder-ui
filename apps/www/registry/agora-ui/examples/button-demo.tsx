@@ -17,16 +17,13 @@ export default function ButtonDemo() {
             </p>
             <div className="flex items-center gap-3">
               <Button size="icon" rounded variant="default">
-                <Mic className="h-4 w-4" />
+                <Mic className="size-6" />
               </Button>
               <Button size="icon" rounded variant="destructive">
-                <X className="h-4 w-4" />
-              </Button>
-              <Button size="icon" rounded variant="outline">
-                <Mic className="h-4 w-4" />
+                <X className="size-6" />
               </Button>
               <Button size="icon" rounded variant="secondary">
-                <Mic className="h-4 w-4" />
+                <Mic className="size-6" />
               </Button>
             </div>
           </div>
@@ -38,10 +35,6 @@ export default function ButtonDemo() {
               <Button rounded variant="default">
                 <Mic className="h-4 w-4" />
                 Recording
-              </Button>
-              <Button rounded variant="outline">
-                <Mic className="h-4 w-4" />
-                Listen
               </Button>
               <Button rounded variant="secondary">
                 Submit
@@ -57,10 +50,6 @@ export default function ButtonDemo() {
                 <Mic className="h-4 w-4" />
                 Default
               </Button>
-              <Button variant="outline">
-                <Mic className="h-4 w-4" />
-                Outline
-              </Button>
               <Button variant="secondary">Secondary</Button>
             </div>
           </div>
@@ -74,9 +63,6 @@ export default function ButtonDemo() {
           <Button variant="default">Default</Button>
           <Button variant="secondary">Secondary</Button>
           <Button variant="destructive">Destructive</Button>
-          <Button variant="outline">Outline</Button>
-          <Button variant="ghost">Ghost</Button>
-          <Button variant="link">Link</Button>
         </div>
       </div>
 
@@ -84,10 +70,7 @@ export default function ButtonDemo() {
       <div className="space-y-4">
         <h3 className="text-lg font-semibold">Sizes</h3>
         <div className="flex flex-wrap items-center gap-3">
-          <Button size="sm">Small</Button>
           <Button size="default">Default</Button>
-          <Button size="lg">Large</Button>
-          <Button size="icon">Sm</Button>
         </div>
       </div>
 
@@ -99,39 +82,6 @@ export default function ButtonDemo() {
           <Button variant="destructive" disabled>
             Destructive Disabled
           </Button>
-          <Button variant="outline" disabled>
-            Outline Disabled
-          </Button>
-          <Button variant="ghost" disabled>
-            Ghost Disabled
-          </Button>
-        </div>
-      </div>
-
-      {/* Combinations */}
-      <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Combinations</h3>
-        <div className="space-y-3">
-          <div className="flex flex-wrap items-center gap-3">
-            <Button variant="default" rounded size="sm">
-              Primary Pill
-            </Button>
-            <Button variant="destructive" size="default">
-              Destructive Default
-            </Button>
-            <Button variant="outline" rounded size="lg">
-              Outline Rounded
-            </Button>
-          </div>
-          <div className="flex flex-wrap items-center gap-3">
-            <Button variant="secondary" rounded>
-              Secondary Rounded
-            </Button>
-            <Button variant="ghost">Ghost Default</Button>
-            <Button variant="link" rounded>
-              Link Rounded
-            </Button>
-          </div>
         </div>
       </div>
 
@@ -140,25 +90,30 @@ export default function ButtonDemo() {
         <h3 className="mb-3 text-sm font-semibold">Props Reference</h3>
         <div className="text-muted-foreground space-y-2 text-xs">
           <div>
-            <strong>variant:</strong> default | secondary | destructive |
-            outline | ghost | link (default: default)
+            <strong>variant:</strong> "default" | "secondary" | "destructive"
+            (default: "default")
           </div>
           <div>
-            <strong>size:</strong> sm | default | lg | icon (default: default)
+            <strong>size:</strong> "default" | "icon" (default: "default")
+            <div className="mt-1 ml-0 text-xs">
+              Note: Icons inside size="icon" auto-scale to size-6 (24×24px)
+            </div>
           </div>
           <div>
             <strong>rounded:</strong> boolean - true for fully rounded
             (pill/circle), false for default rounded corners (default: false)
           </div>
           <div>
-            <strong>disabled:</strong> boolean - disables the button
+            <strong>disabled:</strong> boolean - disables the button (default:
+            false)
           </div>
           <div>
             <strong>asChild:</strong> boolean - render as a different element
-            (requires Slot wrapper)
+            (requires Slot wrapper) (default: false)
           </div>
           <div>
-            <strong>className:</strong> string - additional Tailwind classes
+            <strong>className:</strong> string - additional Tailwind classes for
+            overrides
           </div>
         </div>
       </div>

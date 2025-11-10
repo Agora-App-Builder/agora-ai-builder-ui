@@ -1,18 +1,19 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Sun, Moon } from "lucide-react"
+import { useEffect, useState } from "react"
+import { Moon, Sun } from "lucide-react"
+
 import { Button } from "@/registry/agora-ui/ui/button"
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("light")
+  const [theme, setTheme] = useState<"light" | "dark">("dark")
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
     // Check if dark class exists on html
     const isDark = document.documentElement.classList.contains("dark")
-    setTheme(isDark ? "dark" : "light")
+    setTheme("dark")
   }, [])
 
   const toggleTheme = () => {
