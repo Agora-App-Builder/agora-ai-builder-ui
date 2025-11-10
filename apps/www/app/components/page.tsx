@@ -8,15 +8,13 @@ import ConversationDemo from "@/registry/agora-ui/examples/conversation-demo"
 import LiveWaveformDemo from "@/registry/agora-ui/examples/live-waveform-demo"
 import MicButtonDemo from "@/registry/agora-ui/examples/mic-button-demo"
 import MicSelectorDemo from "@/registry/agora-ui/examples/mic-selector-demo"
+import ThemeDemoComponent from "@/registry/agora-ui/examples/theme-demo"
 
 import { ThemeToggle } from "./theme-toggle"
 
 export default function ComponentsPage() {
   return (
     <main className="bg-background min-h-screen p-8">
-      <div className="mb-8 flex justify-end">
-        <ThemeToggle />
-      </div>
       <div className="mx-auto max-w-4xl space-y-12">
         {/* Header */}
         <div>
@@ -49,6 +47,21 @@ export default function ComponentsPage() {
           </div>
           <div className="rounded-lg border p-6">
             <CardDemo />
+          </div>
+        </section>
+
+        {/* Theme Demo */}
+        <section className="space-y-4">
+          <div>
+            <h2 className="text-2xl font-bold">Dynamic Theme</h2>
+            <p className="text-muted-foreground text-sm">
+              Test the theme system by switching between different primary brand
+              colors. This demonstrates how consuming apps can apply custom colors
+              from their API at runtime.
+            </p>
+          </div>
+          <div className="rounded-lg border p-6">
+            <ThemeDemoComponent />
           </div>
         </section>
 
@@ -92,17 +105,18 @@ export default function ComponentsPage() {
         </section> */}
 
         {/* Mic Selector Component */}
-        {/* <section className="space-y-4">
+        <section className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold">Mic Selector</h2>
             <p className="text-muted-foreground text-sm">
-              A button with dropdown menu for quick selection using MicButton (Composite)
+              A microphone selector component with automatic device detection,
+              mute toggle, and waveform preview using Web Audio API
             </p>
           </div>
           <div className="rounded-lg border p-6">
             <MicSelectorDemo />
           </div>
-        </section> */}
+        </section>
 
         {/* Live Waveform Component */}
         {/* <section className="space-y-4">
