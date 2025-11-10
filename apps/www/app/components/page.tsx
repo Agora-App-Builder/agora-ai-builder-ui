@@ -29,17 +29,18 @@ export default function ComponentsPage() {
         </div>
 
         {/* Button Component */}
-        {/* <section className="space-y-4">
+        <section className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold">Button</h2>
             <p className="text-muted-foreground text-sm">
-              A versatile button component with multiple variants, sizes, and border radius options
+              A versatile button component with multiple variants, sizes, and
+              border radius options
             </p>
           </div>
           <div className="rounded-lg border p-6">
             <ButtonDemo />
           </div>
-        </section> */}
+        </section>
 
         {/* Card Component */}
         <section className="space-y-4">

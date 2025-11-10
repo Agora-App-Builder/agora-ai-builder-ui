@@ -74,16 +74,13 @@
   /* Brand Actions */
   --primary: #099dfd;
   --primary-foreground: #ffffff;
-  --secondary: #19394d;
+  --secondary: #f8f3f1;
+  --secondary-foreground: #19394d;
   /* Font */
   --font-rgb: 51, 51, 51;
   --font: rgba(var(--font-rgb), 1); /* same as high */
   --font-medium: rgba(var(--font-rgb), 0.7);
   --font-low: rgba(var(--font-rgb), 0.4);
-
-  /* Input fields */
-  --input-background: #ffffff; /* INPUT_FIELD_BACKGROUND_COLOR */
-  --input-border: #333333; /* INPUT_FIELD_BORDER_COLOR */
   /* Icon */
   --icon-bg: #ebf1f5;
   /* Cards */
@@ -102,6 +99,7 @@
   --semantic-success: #36b37e;
   --semantic-warning: #ffab00;
   --semantic-neutral: #808080;
+  --destructive: var(--semantic-error);
 }
 
 .dark {
@@ -129,15 +127,13 @@
   /* Agora Brand colors from config */ /* Brand Actions */
   --primary: #099dfd;
   --primary-foreground: #ffffff;
-  --secondary: #ffffff;
+  --secondary: #212121;
+  --secondary-foreground: #ffffff;
   /* Font */
   --font-rgb: 255, 255, 255;
   --font: rgba(var(--font-rgb), 1);
   --font-medium: rgba(var(--font-rgb), 0.7);
   --font-low: rgba(var(--font-rgb), 0.4);
-  /* Input fields */
-  --input-background: #181818; /* INPUT_FIELD_BACKGROUND_COLOR */
-  --input-border: #262626; /* INPUT_FIELD_BORDER_COLOR */
   /* Icon */
   --icon-bg: #242529;
   /* Cards */
@@ -156,6 +152,7 @@
   --semantic-success: #36b37e;
   --semantic-warning: #ffab00;
   --semantic-neutral: #808080;
+  --destructive: var(--semantic-error);
 }
 
 @layer base {
@@ -166,5 +163,12 @@
     @apply bg-background text-foreground;
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
+  }
+}
+
+@layer components {
+  /* Button icon auto-sizing */
+  button[class*="size-12"] svg:not([class*='size-']):not([class*='h-']):not([class*='w-']) {
+    @apply size-6;
   }
 }
