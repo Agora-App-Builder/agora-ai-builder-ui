@@ -84,6 +84,101 @@ export default function ThemeDemo() {
           automatically use these variables for styling.
         </p>
       </div>
+
+      <div className="rounded-lg border p-6">
+        <h3 className="mb-3 text-lg font-semibold">Implementation Guide</h3>
+        <p className="text-muted-foreground mb-4 text-sm">
+          In your consuming application, fetch the theme config from your API
+          and apply it on app initialization:
+        </p>
+        <pre className="bg-muted overflow-auto rounded p-4 text-xs">
+          {`// app.tsx or main.tsx
+import { useEffect } from 'react'
+import {
+  applyCustomTheme,
+  type RemoteThemeConfig
+} from 'agora-ui/lib/theme/apply-theme'
+
+export default function App() {
+  useEffect(() => {
+    const initializeTheme = async () => {
+      try {
+        // Fetch your API config
+        const token = localStorage.getItem('authToken')
+        const response = await fetch(
+          'https://your-api.com/v1/project/config',
+          {
+            headers: {
+              authorization: \`Bearer \${token}\`,
+              'content-type': 'application/json',
+            },
+          }
+        )
+
+        const config: RemoteThemeConfig = await response.json()
+
+        // Apply the theme colors to CSS variables
+        applyCustomTheme(config)
+      } catch (error) {
+        console.error('Failed to load theme config:', error)
+      }
+    }
+
+    initializeTheme()
+  }, [])
+
+  return <YourAppComponents />
+}`}
+        </pre>
+      </div>
+
+      <div className="rounded-lg border p-6">
+        <h3 className="mb-3 text-lg font-semibold">API Config Format</h3>
+        <p className="text-muted-foreground mb-4 text-sm">
+          Your API should return a config object with optional color fields:
+        </p>
+        <pre className="bg-muted overflow-auto rounded p-4 text-xs">
+          {`{
+  "PRIMARY_COLOR": "#099dfd",
+  "PRIMARY_ACTION_BRAND_COLOR": "#E62079",
+  "FONT_COLOR": "#FFFFFF",
+  "PRIMARY_FONT_COLOR": "#363636",
+  "SECONDARY_FONT_COLOR": "#FFFFFF",
+  "BACKGROUND_COLOR": "#111111",
+  "ICON_BG_COLOR": "#242529",
+  "TOOLBAR_COLOR": "#111111",
+  "INPUT_FIELD_BACKGROUND_COLOR": "#181818",
+  "INPUT_FIELD_BORDER_COLOR": "#262626",
+  "CARD_LAYER_1_COLOR": "#1d1d1d",
+  "CARD_LAYER_2_COLOR": "#262626",
+  "CARD_LAYER_3_COLOR": "#2d2d2d",
+  "CARD_LAYER_4_COLOR": "#333333",
+  "CARD_LAYER_5_COLOR": "#808080",
+  "VIDEO_AUDIO_TILE_COLOR": "#222222",
+  "VIDEO_AUDIO_TILE_OVERLAY_COLOR": "#000004",
+  "VIDEO_AUDIO_TILE_TEXT_COLOR": "#ffffff",
+  "VIDEO_AUDIO_TILE_AVATAR_COLOR": "#bdd0db",
+  "SEMANTIC_ERROR": "#ff414d",
+  "SEMANTIC_SUCCESS": "#36b37e",
+  "SEMANTIC_WARNING": "#ffab00",
+  "SEMANTIC_NEUTRAL": "#808080"
+}`}
+        </pre>
+      </div>
+
+      <div className="space-y-2 rounded-lg border border-blue-200 bg-blue-50 p-6 dark:border-blue-800 dark:bg-blue-950/20">
+        <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100">
+          💡 Key Points
+        </h3>
+        <ul className="list-inside list-disc space-y-1 text-sm text-blue-800 dark:text-blue-200">
+          <li>All color fields in the API config are optional</li>
+          <li>Only provide colors to override; others use defaults</li>
+          <li>Colors must be valid hex format (e.g., "#099dfd")</li>
+          <li>Apply theme early in your app lifecycle</li>
+          <li>Use separate API responses for light and dark modes</li>
+          <li>Components automatically update—no manual re-renders needed</li>
+        </ul>
+      </div>
     </div>
   )
 }
