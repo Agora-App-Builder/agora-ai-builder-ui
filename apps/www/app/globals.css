@@ -20,13 +20,10 @@
   --opacity-disabled: 0.4;
 
   /* Font shades */
-  --color-font: var(--font-color);
-  --color-font-primary: var(--primary-font-color);
-  --color-font-secondary: var(--secondary-font-color);
   --color-font: var(--font);
-  --color-font-high: var(--font-high);
-  --color-font-medium: var(--font-medium);
-  --color-font-low: var(--font-low);
+  --color-font-high: rgba(var(--font-rgb), var(--opacity-high));
+  --color-font-medium: rgba(var(--font-rgb), var(--opacity-medium));
+  --color-font-low: rgba(var(--font-rgb), var(--opacity-low));
 
   /* Border Radius */
   --radius: 0.75rem; /* base = 12px (your lg) */
@@ -39,7 +36,7 @@
   --color-background: var(--background-color);
   --color-foreground: var(--font-color);
   --color-popover: var(--card-layer-one-color);
-  --color-popover-foreground: var(--font-high);
+  --color-popover-foreground: var(--color-font-high);
   --color-primary: var(--primary-action-brand-color);
   --color-primary-brand: var(--primary-action-brand-color);
   --color-primary-foreground: var(--primary-action-text-color);
@@ -65,8 +62,8 @@
   --color-input-field-border: var(--input-field-border-color);
 
   /* Cards */
-  --color-card: var(--input-field-bg);
-  --color-card-foreground: var(--font-low);
+  --color-card: var(--input-field-background-color);
+  --color-card-foreground: var(--color-font-low);
   --color-card-layer-1: var(--card-layer-one-color);
   --color-card-layer-2: var(--card-layer-two-color);
   --color-card-layer-3: var(--card-layer-three-color);
@@ -94,9 +91,6 @@
   --font-color: #ffffff;
   --font-rgb: 255, 255, 255;
   --font: rgba(var(--font-rgb), 1);
-  --font-high: rgba(var(--font-rgb), 1); /* PRIMARY_FONT_COLOR */
-  --font-medium: rgba(var(--font-rgb), 0.7);
-  --font-low: rgba(var(--font-rgb), 0.4);
 
   --primary-action-brand-color: #099dfd;
   --primary-action-text-color: #ffffff;
