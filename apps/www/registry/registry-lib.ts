@@ -10,6 +10,7 @@ export const lib: Registry["items"] = [
       {
         path: "lib/theme/apply-theme.ts",
         type: "registry:lib",
+        target: "lib/theme/apply-theme.ts",
       },
     ],
   },
