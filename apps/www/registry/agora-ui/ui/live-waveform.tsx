@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef, type HTMLAttributes } from "react"
+import { useEffect, useRef, useState, type HTMLAttributes } from "react"
 
 import { cn } from "@/lib/utils"
 
@@ -76,17 +76,36 @@ export const LiveWaveform = ({
 
   // Microphone setup and frequency data extraction
   useEffect(() => {
-    if (!active) {
+    if (!active || !deviceId) {
       if (streamRef.current) {
         streamRef.current.getTracks().forEach((track) => track.stop())
       }
-      if (audioContextRef.current && audioContextRef.current.state !== "closed") {
+      if (
+        audioContextRef.current &&
+        audioContextRef.current.state !== "closed"
+      ) {
         audioContextRef.current.close()
       }
       if (animationIdRef.current) {
         cancelAnimationFrame(animationIdRef.current)
       }
-      return
+
+      // create gentle idle animation
+      let rafId: number
+      let t = 0
+      const animateIdle = () => {
+        t += 0.03
+        // generate flat, symmetric waveform values
+        const idleArray = Array.from(
+          { length: 64 },
+          (_, i) => 0.05 + Math.sin(t + i * 0.3) * 0.01
+        )
+        setData(idleArray)
+        rafId = requestAnimationFrame(animateIdle)
+      }
+      animateIdle()
+      // cleanup when effect re-runs (e.g., mic turns on)
+      return () => cancelAnimationFrame(rafId)
     }
 
     const setupMicrophone = async () => {
@@ -162,7 +181,10 @@ export const LiveWaveform = ({
       if (streamRef.current) {
         streamRef.current.getTracks().forEach((track) => track.stop())
       }
-      if (audioContextRef.current && audioContextRef.current.state !== "closed") {
+      if (
+        audioContextRef.current &&
+        audioContextRef.current.state !== "closed"
+      ) {
         audioContextRef.current.close()
       }
       if (animationIdRef.current) {
@@ -261,7 +283,11 @@ export const LiveWaveform = ({
       role="img"
       {...props}
     >
-      <canvas className="block h-full w-full" ref={canvasRef} aria-hidden="true" />
+      <canvas
+        className="block h-full w-full"
+        ref={canvasRef}
+        aria-hidden="true"
+      />
     </div>
   )
 }

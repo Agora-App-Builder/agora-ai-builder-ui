@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useState } from "react"
-import { Check, ChevronDown, Mic, MicOff } from "lucide-react"
+import { Check, ChevronDown, Mic, MicIcon, MicOff } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { useAudioDevices } from "@/registry/agora-ui/hooks/use-audio-devices"
@@ -30,11 +30,6 @@ export interface MicSelectorProps {
    * @default "idle"
    */
   state?: MicButtonState
-  /**
-   * Show error badge when in error state (indicates permission denied)
-   * @default false
-   */
-  showErrorBadge?: boolean
 }
 
 export function MicSelector({
@@ -44,7 +39,6 @@ export function MicSelector({
   onMutedChange,
   disabled = false,
   className,
-  showErrorBadge = false,
 }: MicSelectorProps) {
   const [state, setState] = useState<
     "idle" | "listening" | "success" | "error"
@@ -107,7 +101,7 @@ export function MicSelector({
   }
 
   const isError = state === "error" || !hasPermission
-  const showWaveform = !isMuted
+  console.log("supriya-isError: ", isError, isMuted)
 
   return (
     <Chip>
@@ -119,23 +113,27 @@ export function MicSelector({
           size={"sm"}
           disabled={isError}
         >
-          {isMuted || isError ? (
-            <MicOff className="text-error size-4" />
+          {isError ? (
+            <MicOff className={`size-4`} />
+          ) : isMuted ? (
+            <MicOff className={`text-error size-4`} />
           ) : (
-            <Mic className="size-4" />
+            <Mic className={`size-4`} />
           )}
         </IconButton>
         {isError && (
-          <div className="bg-warning absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full">
-            <span className="text-font text-xs leading-none font-bold">!</span>
+          <div className="bg-warning absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full">
+            <span className="text-hard-black text-xs leading-none font-bold">
+              !
+            </span>
           </div>
         )}
       </div>
       <div className="w-10">
         <LiveWaveform
-          active={!muted}
+          active={!isMuted}
           deviceId={selectedDevice || defaultDeviceId}
-          height={15}
+          height={20}
           barWidth={3}
           barGap={1}
         />
