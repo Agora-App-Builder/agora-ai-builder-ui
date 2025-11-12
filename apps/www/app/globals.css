@@ -13,6 +13,13 @@
   --text-x-large: 1.5rem; /* 24px */
   --text-extra-large: 2rem; /* 32px */
 
+  /* Line height - Semantic */
+  --line-height-tight: 0.75rem; /* 12px - compact/tight text */
+  --line-height-snug: 1rem; /* 16px - slightly tight */
+  --line-height-normal: 1.25rem; /* 20px - default reading */
+  --line-height-relaxed: 1.5rem; /* 24px - comfortable reading */
+  --line-height-loose: 1.75rem; /* 28px - very spacious */
+
   /* Text emphasis (opacity or transparency levels) */
   --opacity-high: 1;
   --opacity-medium: 0.7;
@@ -134,6 +141,7 @@
 
 @layer base {
   * {
+    /* box-sizing: border-box; */
     @apply border-border outline-ring/50;
   }
   body {
