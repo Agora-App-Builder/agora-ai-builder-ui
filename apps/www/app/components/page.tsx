@@ -1,4 +1,3 @@
-import AgentPickerDemo from "@/registry/agora-ui/examples/agent-picker-demo"
 import AgentVisualizerDemo from "@/registry/agora-ui/examples/agent-visualizer-demo"
 import AvatarDemo from "@/registry/agora-ui/examples/avatar-demo"
 import ButtonDemo from "@/registry/agora-ui/examples/button-demo"
@@ -12,6 +11,7 @@ import MicSelectorDemo from "@/registry/agora-ui/examples/mic-selector-demo"
 import ThemeDemoComponent from "@/registry/agora-ui/examples/theme-demo"
 
 import { IconButtonDemo } from "../../registry/agora-ui/examples/icon-button-demo"
+import ValuePickerDemo from "../../registry/agora-ui/examples/value-picker-demo"
 import { ThemeToggle } from "./theme-toggle"
 
 export default function ComponentsPage() {
@@ -103,18 +103,18 @@ export default function ComponentsPage() {
           </div>
         </section>
 
-        {/* Agent Picker Component */}
-        {/* <section className="space-y-4">
+        {/* Value Picker Component */}
+        <section className="space-y-4">
           <div>
-            <h2 className="text-2xl font-bold">Agent Picker</h2>
+            <h2 className="text-2xl font-bold">Value Picker</h2>
             <p className="text-muted-foreground text-sm">
-              A searchable dropdown to select agents from a list (Popover-based)
+              A generic dropdown to select a value from a list
             </p>
           </div>
           <div className="rounded-lg border p-6">
-            <AgentPickerDemo />
+            <ValuePickerDemo />
           </div>
-        </section> */}
+        </section>
 
         {/* Mic Button Component */}
         {/* <section className="space-y-4">

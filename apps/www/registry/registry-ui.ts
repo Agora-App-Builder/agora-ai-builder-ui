@@ -67,17 +67,17 @@ export const ui: Registry["items"] = [
     ],
   },
   {
-    name: "agent-picker",
-    description: "A dropdown component to select agents from a list",
+    name: "value-picker",
+    description: "A generic dropdown component to select a value from a list",
     type: "registry:ui",
-    registryDependencies: ["button", "popover", "command"],
+    registryDependencies: ["button"],
     files: [
       {
-        path: "ui/agent-picker.tsx",
+        path: "ui/value-picker.tsx",
         type: "registry:ui",
       },
       {
-        path: "examples/agent-picker-demo.tsx",
+        path: "examples/value-picker-demo.tsx",
         type: "registry:example",
       },
     ],
