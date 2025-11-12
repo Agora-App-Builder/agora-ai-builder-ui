@@ -54,7 +54,8 @@ const ValuePicker = React.forwardRef<
             ref={ref}
             disabled={disabled}
             className={cn(
-              "bg-input-field-bg text-font-high text-normal inline-flex w-full items-center justify-between rounded-md border p-3 font-medium outline-hidden",
+              "bg-input-field-bg text-font-high text-normal inline-flex w-full items-center justify-between border p-3 font-medium outline-hidden",
+              "data-[state=closed]:rounded-md data-[state=open]:rounded-none",
               "data-[placeholder]:text-muted-foreground",
               "disabled:pointer-events-none disabled:opacity-50"
             )}
